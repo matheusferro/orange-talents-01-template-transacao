@@ -1,6 +1,6 @@
 package br.com.zup.transacao.kafka;
 
-import br.com.zup.transacao.listener.TransactionEvent;
+import br.com.zup.transacao.listener.dto.TransactionEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
