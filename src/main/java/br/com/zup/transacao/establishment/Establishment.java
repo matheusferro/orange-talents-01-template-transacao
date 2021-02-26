@@ -30,4 +30,8 @@ public class Establishment {
         this.establishmentCity = city;
         this.establishmentAddress = address;
     }
+
+    public String getEstablishmentName() {
+        return establishmentName;
+    }
 }

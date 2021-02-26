@@ -29,4 +29,8 @@ public class Card {
         this.cardNumber = cardNumber;
         this.email = email;
     }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
 }

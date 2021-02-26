@@ -54,4 +54,24 @@ public class Transactions {
         this.card = card;
         this.effectiveOn = effectiveOn;
     }
+
+    public UUID getTransactionId() {
+        return transactionId;
+    }
+
+    public BigDecimal getTransactionValue() {
+        return transactionValue;
+    }
+
+    public Establishment getEstablishment() {
+        return establishment;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public LocalDateTime getEffectiveOn() {
+        return effectiveOn;
+    }
 }
