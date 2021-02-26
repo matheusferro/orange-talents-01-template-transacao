@@ -1,9 +1,14 @@
-package br.com.zup.transacao.listener.dto;
+package br.com.zup.transacao.transaction;
 
+import br.com.zup.transacao.card.CardEvent;
+import br.com.zup.transacao.card.CardRepository;
+import br.com.zup.transacao.establishment.EstablishmentEvent;
+import br.com.zup.transacao.establishment.EstablishmentRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class TransactionEvent {
 
@@ -31,5 +36,17 @@ public class TransactionEvent {
                 ", card=" + card +
                 ", effectiveOn=" + effectiveOn +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Transactions toModel(CardRepository cardRepository, EstablishmentRepository establishmentRepository) {
+        return new Transactions(UUID.fromString(this.id),
+                this.value,
+                this.establishment.toModel(establishmentRepository),
+                this.card.toModel(cardRepository),
+                effectiveOn);
     }
 }
