@@ -5,7 +5,9 @@ import br.com.zup.transacao.transaction.TransactionEvent;
 import br.com.zup.transacao.card.CardRepository;
 import br.com.zup.transacao.transaction.Transactions;
 import br.com.zup.transacao.transaction.TransactionsRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.converter.JsonMessageConverter;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -14,6 +16,13 @@ import java.util.UUID;
 
 @Component
 public class TransactionListener {
+    /**
+     * Metodo utilizado para serializacao dos topicos do kafka
+     */
+    @Bean
+    JsonMessageConverter jsonMessageConverter() {
+        return new JsonMessageConverter();
+    }
 
     private CardRepository cardRepository;
 
@@ -29,7 +38,7 @@ public class TransactionListener {
     }
 
     @Transactional
-    @KafkaListener(topics = "${spring.kafka.topic.transactions}")
+    @KafkaListener(id = "transactions",topics = "${spring.kafka.topic.transactions}")
     public void listener(TransactionEvent transactionEvent){
         Optional<Transactions> transactionsOptional = transactionsRepository.findByTransactionId(UUID.fromString(transactionEvent.getId()));
         if(transactionsOptional.isEmpty()) {
